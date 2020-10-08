@@ -6,7 +6,7 @@
 # To get the Name and the KEYID for the latest secureboot crt, look in one of
 # the secureboot signed packages (currently centossecureboot201.crt) and use the command:
 # openssl x509 -in centossecureboot201.crt -text
-# You want to build "--expect-cert" from the CN (line 12) and the X509v3 Subject Key Identifier (line 44).  Remove the : and convert to lower case.
+# You want to build "--expect-cert" from the Issuer: CN (line 8) and the X509v3 Authority Key Identifier (line 46).  Remove the : and convert to lower case.
 # example:  echo 5D:4B:64:F2:FA:63:1E:5E:5F:DB:AA:DC:14:67:C6:6C:99:21:7A:22 | sed | 's,:,,g' | awk '{print tolower($0)}'
 
 function usage() {
@@ -121,7 +121,7 @@ python qemu-secureboot-tester/sbtest \
   --test-signed \
   --ovmf-binary /usr/share/OVMF/OVMF_CODE.secboot.fd \
   --ovmf-template-vars /usr/share/OVMF/OVMF_VARS.secboot.fd \
-  --expect-cert "CentOS Secure Boot Signing 201: 5d4b64f2fa631e5e5fdbaadc1467c66c99217a22" \
+  --expect-cert "CentOS Secure Boot Signing 2: 70007f99209c126be14774eaec7b6d9631f34dca" \
    $shim_file $grub2_file $kernel_file
 else
    echo "$shim_file is supposed to be unsigned, so auto-signing it to validate other pkgs ..."
@@ -132,7 +132,7 @@ python qemu-secureboot-tester/sbtest \
   --enable-kvm \
   --ovmf-binary /usr/share/OVMF/OVMF_CODE.secboot.fd \
   --ovmf-template-vars /usr/share/OVMF/OVMF_VARS.fd \
-  --expect-cert "CentOS Secure Boot Signing 201: 5d4b64f2fa631e5e5fdbaadc1467c66c99217a22" \
+  --expect-cert "CentOS Secure Boot Signing 2: 70007f99209c126be14774eaec7b6d9631f34dca" \
    $shim_file $grub2_file $kernel_file
 fi
 
