@@ -3,6 +3,12 @@
 # This script accepts multiple paramaters
 # see usage() for required parameters
 
+# To get the Name and the KEYID for the latest secureboot crt, look in one of
+# the secureboot signed packages (currently centossecureboot201.crt) and use the command:
+# openssl x509 -in centossecureboot201.crt -text
+# You want to build "--expect-cert" from the CN (line 12) and the X509v3 Subject Key Identifier (line 44).  Remove the : and convert to lower case.
+# example:  echo 5D:4B:64:F2:FA:63:1E:5E:5F:DB:AA:DC:14:67:C6:6C:99:21:7A:22 | sed | 's,:,,g' | awk '{print tolower($0)}'
+
 function usage() {
 cat << EOF
 
@@ -23,7 +29,7 @@ fi
 
 # Some defined variables
 # need a specific OVMF that has the MS keys rolled-in
-# should land in 7.6.1810 but not yet available and signed on mirrors
+# This is usually the latest OVMF from the mirrors, could come from QA repos if testing new release
 ovmf_rpm="http://mirror.centos.org/centos/7/os/x86_64/Packages/OVMF-20180508-6.gitee3198e672e2.el7.noarch.rpm"
 
 while getopts "hk:s:g:" option
