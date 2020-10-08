@@ -121,7 +121,7 @@ python qemu-secureboot-tester/sbtest \
   --test-signed \
   --ovmf-binary /usr/share/OVMF/OVMF_CODE.secboot.fd \
   --ovmf-template-vars /usr/share/OVMF/OVMF_VARS.secboot.fd \
-  --expect-cert "CentOS Secure Boot Signing 2: 70007f99209c126be14774eaec7b6d9631f34dca" \
+  --expect-cert "CentOS Secure Boot CA 2: 70007f99209c126be14774eaec7b6d9631f34dca" \
    $shim_file $grub2_file $kernel_file
 else
    echo "$shim_file is supposed to be unsigned, so auto-signing it to validate other pkgs ..."
@@ -132,7 +132,7 @@ python qemu-secureboot-tester/sbtest \
   --enable-kvm \
   --ovmf-binary /usr/share/OVMF/OVMF_CODE.secboot.fd \
   --ovmf-template-vars /usr/share/OVMF/OVMF_VARS.fd \
-  --expect-cert "CentOS Secure Boot Signing 2: 70007f99209c126be14774eaec7b6d9631f34dca" \
+  --expect-cert "CentOS Secure Boot CA 2: 70007f99209c126be14774eaec7b6d9631f34dca" \
    $shim_file $grub2_file $kernel_file
 fi
 
